@@ -1,0 +1,606 @@
+<title>Emeraude — Hairstyliste Cergy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#241a13;
+    --amber:#b9601f;
+    --amber-deep:#7a3c10;
+    --amber-glow:#e8944a;
+    --paper:#f3efe7;
+    --paper-dim:#e8e1d2;
+    --line:#d8cfba;
+    --text:#241a13;
+    --text-soft:#6b5d4e;
+    --surface:#fffdf9;
+    --focus:#b9601f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#f3efe7;
+      --amber:#e8863f;
+      --amber-deep:#b9601f;
+      --amber-glow:#f4b47a;
+      --paper:#161009;
+      --paper-dim:#211810;
+      --line:#3a2c1f;
+      --text:#f3efe7;
+      --text-soft:#b7ab99;
+      --surface:#1c140d;
+      --focus:#e8863f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#f3efe7;
+    --amber:#e8863f;
+    --amber-deep:#b9601f;
+    --amber-glow:#f4b47a;
+    --paper:#161009;
+    --paper-dim:#211810;
+    --line:#3a2c1f;
+    --text:#f3efe7;
+    --text-soft:#b7ab99;
+    --surface:#1c140d;
+    --focus:#e8863f;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Jost', ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.65;
+  }
+  h1,h2,h3{
+    font-family:'Spectral', ui-serif, Georgia, serif;
+    font-weight:500;
+    color:var(--text);
+    margin:0;
+    text-wrap:balance;
+  }
+  a{ color:inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--focus);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 clamp(18px, 5vw, 52px);
+  }
+  .eyebrow{
+    font-size:0.76rem;
+    font-weight:600;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--amber);
+  }
+
+  /* ---------- zigzag motif divider ---------- */
+  .motif{
+    height:10px;
+    width:100%;
+    background:
+      linear-gradient(135deg, transparent 45%, var(--amber) 45% 55%, transparent 55%) 0 0/16px 10px repeat-x,
+      linear-gradient(-135deg, transparent 45%, var(--ink) 45% 55%, transparent 55%) 0 0/16px 10px repeat-x;
+    opacity:0.5;
+  }
+
+  /* ---------- Header ---------- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:color-mix(in srgb, var(--paper) 90%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px clamp(18px, 5vw, 52px);
+  }
+  .brand{
+    font-family:'Spectral', serif;
+    font-size:1.2rem;
+    font-style:italic;
+    font-weight:600;
+  }
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:clamp(10px, 2.5vw, 22px);
+  }
+  .phone-link{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--text);
+    white-space:nowrap;
+  }
+  .phone-link svg{ flex:none; width:16px; height:16px; stroke:var(--amber); }
+  .phone-link .num{ display:none; }
+  @media (min-width:460px){ .phone-link .num{ display:inline; } }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:13px 24px;
+    border-radius:3px;
+    font-family:'Jost', sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    letter-spacing:0.02em;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .16s ease, box-shadow .16s ease, background .16s ease, opacity .16s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--amber);
+    color:#fffaf3;
+    box-shadow:0 8px 20px -9px color-mix(in srgb, var(--amber) 65%, transparent);
+  }
+  .btn-primary:hover{ background:var(--amber-deep); transform:translateY(-1px); }
+  .btn-outline{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--text);
+  }
+  .btn-outline:hover{ border-color:var(--amber); color:var(--amber); }
+  .btn-sm{ padding:10px 18px; font-size:0.85rem; }
+  .btn-block{ width:100%; }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:clamp(40px, 7vw, 76px) 0 clamp(48px, 7vw, 84px); }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:clamp(28px, 5vw, 60px);
+    align-items:center;
+  }
+  @media (max-width:840px){ .hero .wrap{ grid-template-columns:1fr; } }
+  .hero-title{
+    font-size:clamp(2.3rem, 5vw, 3.5rem);
+    line-height:1.08;
+    letter-spacing:-0.005em;
+  }
+  .hero-title em{ color:var(--amber); font-style:italic; }
+  .hero-sub{
+    margin-top:18px;
+    font-size:clamp(1.02rem, 1.5vw, 1.15rem);
+    color:var(--text-soft);
+    max-width:44ch;
+  }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; margin-top:30px; }
+  .hero-visual{
+    position:relative;
+    border-radius:6px;
+    overflow:hidden;
+    aspect-ratio:4/5;
+  }
+  #hero-canvas{ width:100%; height:100%; display:block; }
+
+  /* ---------- Services list ---------- */
+  .services{ padding:clamp(48px, 7vw, 84px) 0; }
+  .section-head{ margin-bottom:clamp(28px, 5vw, 44px); }
+  .section-head h2{ font-size:clamp(1.8rem, 3.4vw, 2.4rem); margin-top:8px; }
+  .service-list{ border-top:1px solid var(--line); }
+  .service-row{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:clamp(16px, 3vw, 32px);
+    padding:clamp(22px, 3vw, 30px) 0;
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:600px){ .service-row{ grid-template-columns:44px 1fr; } }
+  .service-row .n{
+    font-family:'Spectral', serif;
+    font-style:italic;
+    font-size:1.6rem;
+    color:var(--amber);
+  }
+  .service-row h3{ font-size:1.3rem; margin-bottom:8px; }
+  .service-row p{ margin:0; color:var(--text-soft); max-width:60ch; }
+
+  /* ---------- About ---------- */
+  .about{ padding:clamp(48px, 7vw, 84px) 0; background:var(--paper-dim); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .about .wrap{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:clamp(28px, 5vw, 60px);
+    align-items:center;
+  }
+  @media (max-width:840px){ .about .wrap{ grid-template-columns:1fr; } }
+  .about-visual{
+    border-radius:6px;
+    overflow:hidden;
+    aspect-ratio:1/1;
+  }
+  #about-canvas{ width:100%; height:100%; display:block; }
+  .about-copy h2{ font-size:clamp(1.8rem, 3.4vw, 2.4rem); margin-bottom:16px; }
+  .about-copy p{ color:var(--text-soft); max-width:58ch; }
+  .about-highlight{
+    margin-top:20px;
+    padding:16px 20px;
+    border-left:3px solid var(--amber);
+    background:var(--surface);
+    font-style:italic;
+    font-family:'Spectral', serif;
+    color:var(--text);
+    max-width:56ch;
+  }
+
+  /* ---------- Reviews ---------- */
+  .reviews{ padding:clamp(48px, 7vw, 84px) 0; }
+  .reviews .section-head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  .example-note{ font-size:0.82rem; color:var(--text-soft); }
+  .review-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  @media (max-width:840px){ .review-grid{ grid-template-columns:1fr; } }
+  .review-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .stars{ color:var(--amber); letter-spacing:2px; font-size:0.95rem; }
+  .review-card p{ margin:0; color:var(--text); font-size:0.96rem; }
+  .review-card cite{ font-style:normal; color:var(--text-soft); font-size:0.85rem; }
+
+  /* ---------- Contact ---------- */
+  .contact{ padding:clamp(48px, 7vw, 84px) 0; background:var(--paper-dim); border-top:1px solid var(--line); }
+  .contact .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:clamp(28px, 5vw, 60px);
+  }
+  @media (max-width:840px){ .contact .wrap{ grid-template-columns:1fr; } }
+  .contact-info h2{ font-size:clamp(1.8rem, 3.4vw, 2.3rem); margin-bottom:16px; }
+  .contact-info p{ color:var(--text-soft); max-width:48ch; }
+  .contact-phone{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    margin-top:24px;
+    padding:16px 22px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    text-decoration:none;
+    color:var(--text);
+  }
+  .contact-phone svg{ width:22px; height:22px; stroke:var(--amber); flex:none; }
+  .contact-phone .big{ font-family:'Spectral', serif; font-size:1.3rem; font-weight:600; display:block; }
+  .contact-phone .lbl{ font-size:0.78rem; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.08em; }
+  .contact-zone{ margin-top:18px; font-size:0.9rem; color:var(--text-soft); }
+
+  form.contact-form{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:clamp(22px, 3vw, 30px);
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-size:0.82rem; font-weight:600; color:var(--text-soft); }
+  .field input, .field textarea{
+    font-family:'Jost', sans-serif;
+    font-size:0.95rem;
+    padding:11px 13px;
+    border-radius:4px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--text);
+    resize:vertical;
+  }
+  .field textarea{ min-height:96px; }
+  .form-ctas{ display:flex; flex-wrap:wrap; gap:10px; margin-top:4px; }
+  .form-note{ font-size:0.78rem; color:var(--text-soft); margin:0; }
+
+  /* ---------- Final CTA / footer ---------- */
+  .cta-final{ padding:clamp(44px, 7vw, 72px) 0; text-align:center; }
+  .cta-final h2{ font-size:clamp(1.7rem, 3.4vw, 2.2rem); max-width:20ch; margin:0 auto; }
+  .cta-final .hero-ctas{ justify-content:center; margin-top:26px; }
+
+  footer.site-foot{
+    padding:26px 0 34px;
+    text-align:center;
+    font-size:0.85rem;
+    color:var(--text-soft);
+    border-top:1px solid var(--line);
+  }
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">Emeraude</div>
+    <div class="nav-right">
+      <a class="phone-link" href="tel:+33616424964">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="num">06 16 42 49 64</span>
+      </a>
+      <a class="btn btn-primary btn-sm" href="#contact">Demander un devis</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Hairstyliste · Cergy</p>
+      <h1 class="hero-title">Des cheveux suivis,<br>une <em>routine</em> qui vous ressemble.</h1>
+      <p class="hero-sub">Braids, tresses et suivi de routine capillaire à Cergy — un accompagnement personnel, pensé pour vos cheveux et leur histoire.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Demander un devis</a>
+        <a class="btn btn-outline" href="tel:+33616424964">Appeler · 06 16 42 49 64</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <canvas id="hero-canvas" width="640" height="800" aria-label="Portrait stylisé, silhouette bouclée sur fond ambré" role="img"></canvas>
+    </div>
+  </div>
+</section>
+
+<div class="motif" role="presentation"></div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Prestations</p>
+      <h2>Ce que je propose</h2>
+    </div>
+    <div class="service-list">
+      <div class="service-row">
+        <span class="n">01</span>
+        <div>
+          <h3>Braids</h3>
+          <p>Des braids nettes et bien réparties, pensées pour tenir dans la durée sans tirer sur le cuir chevelu. On choisit ensemble la taille et le motif adaptés à votre visage et à votre rythme de vie.</p>
+        </div>
+      </div>
+      <div class="service-row">
+        <span class="n">02</span>
+        <div>
+          <h3>Tresses</h3>
+          <p>Tresses collées, classiques ou revisitées : je prépare toujours le cheveu en amont pour un résultat propre, confortable et durable, quel que soit le style choisi.</p>
+        </div>
+      </div>
+      <div class="service-row">
+        <span class="n">03</span>
+        <div>
+          <h3>Suivi de routine capillaire</h3>
+          <p>Un accompagnement régulier pour apprendre à connaître vos cheveux : bons gestes, bons produits, bon rythme. L'objectif est simple, des cheveux en meilleure santé entre chaque rendez-vous.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-visual">
+      <canvas id="about-canvas" width="600" height="600" aria-label="Motif texturé, boucles stylisées" role="img"></canvas>
+    </div>
+    <div class="about-copy">
+      <p class="eyebrow">À propos</p>
+      <h2>Un suivi pensé pour chaque chevelure</h2>
+      <p>Je m'appelle Emeraude, hairstyliste à Cergy depuis 10 ans. Chaque personne qui vient me voir a une histoire capillaire différente — c'est pour ça que je ne propose jamais la même routine à tout le monde.</p>
+      <p>Avant chaque prestation, je prends le temps d'observer votre cuir chevelu, votre texture et vos habitudes, pour construire avec vous une procédure capillaire qui vous ressemble et qui dure dans le temps.</p>
+      <p class="about-highlight">« Ici, pas de rendez-vous à la chaîne : chaque client a son propre suivi. »</p>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="avis">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Avis clients</p>
+        <h2>Ce qu'on en dit</h2>
+      </div>
+      <p class="example-note">Avis d'exemple — à remplacer par vos vrais avis Google.</p>
+    </div>
+    <div class="review-grid">
+      <article class="review-card">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>« Premier rendez-vous et déjà conquise. Emeraude prend vraiment le temps d'expliquer et de comprendre ce dont mes cheveux ont besoin. »</p>
+        <cite>— Cliente, Cergy</cite>
+      </article>
+      <article class="review-card">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>« Mes braids tiennent parfaitement et n'ont pas tiré du tout. Le suivi entre les rendez-vous fait vraiment la différence. »</p>
+        <cite>— Client, Cergy</cite>
+      </article>
+      <article class="review-card">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>« Enfin une routine capillaire adaptée à mes cheveux et pas une routine générique. Je recommande sans hésiter. »</p>
+        <cite>— Cliente, Pontoise</cite>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-info">
+      <p class="eyebrow">Contact</p>
+      <h2>Parlons de vos cheveux</h2>
+      <p>Un projet de coiffure ou besoin de conseils pour votre routine ? Écrivez-moi ou appelez-moi directement, je réponds avec plaisir.</p>
+      <a class="contact-phone" href="tel:+33616424964">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>
+          <span class="lbl">Appelez directement</span>
+          <span class="big">06 16 42 49 64</span>
+        </span>
+      </a>
+      <p class="contact-zone">Cergy et alentours · sur rendez-vous</p>
+    </div>
+    <form class="contact-form" id="contactForm">
+      <div class="field">
+        <label for="cf-name">Nom</label>
+        <input id="cf-name" name="name" type="text" placeholder="Votre nom" required>
+      </div>
+      <div class="field">
+        <label for="cf-phone">Téléphone</label>
+        <input id="cf-phone" name="phone" type="tel" placeholder="Votre numéro" required>
+      </div>
+      <div class="field">
+        <label for="cf-msg">Message</label>
+        <textarea id="cf-msg" name="message" placeholder="Décrivez votre demande (style souhaité, disponibilités...)" required></textarea>
+      </div>
+      <div class="form-ctas">
+        <button type="submit" class="btn btn-primary" style="flex:1;">Envoyer par WhatsApp</button>
+      </div>
+      <p class="form-note">Le message s'ouvre dans WhatsApp, pré-rempli avec vos informations, prêt à envoyer.</p>
+    </form>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <h2>Envie de prendre soin de vos cheveux ?</h2>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#contact">Demander un devis</a>
+      <a class="btn btn-outline" href="tel:+33616424964">06 16 42 49 64</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  Emeraude — Hairstyliste à Cergy · 06 16 42 49 64
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('cf-name').value.trim();
+    var phone = document.getElementById('cf-phone').value.trim();
+    var msg = document.getElementById('cf-msg').value.trim();
+    var text = 'Bonjour Emeraude, je m\'appelle ' + name + ' (tel : ' + phone + '). ' + msg;
+    var url = 'https://wa.me/33616424964?text=' + encodeURIComponent(text);
+    window.open(url, '_blank');
+  });
+})();
+</script>
+
+<script>
+(function(){
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function paintPanel(canvas, seed, shoulders){
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height;
+    var rand = mulberry32(seed);
+
+    var amberDeep = tok('--amber-deep');
+    var amber = tok('--amber');
+    var glow = tok('--amber-glow');
+    var ink = tok('--ink');
+
+    var grad = ctx.createLinearGradient(0, 0, W * 0.3, H);
+    grad.addColorStop(0, glow);
+    grad.addColorStop(0.55, amber);
+    grad.addColorStop(1, amberDeep);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    var vg = ctx.createRadialGradient(W*0.5, H*0.5, H*0.15, W*0.5, H*0.5, H*0.75);
+    vg.addColorStop(0, 'rgba(0,0,0,0)');
+    vg.addColorStop(1, 'rgba(0,0,0,0.28)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = ink;
+    ctx.globalAlpha = 0.92;
+
+    var cx = W * 0.52;
+    var cy = H * (shoulders ? 0.36 : 0.46);
+    var baseR = Math.min(W, H) * (shoulders ? 0.24 : 0.30);
+
+    var puffs = 46;
+    for (var i = 0; i < puffs; i++){
+      var ang = (i / puffs) * Math.PI * 2;
+      var wob = 0.72 + rand() * 0.5;
+      var r = baseR * wob;
+      var px = cx + Math.cos(ang) * baseR * 0.62 + (rand() - 0.5) * baseR * 0.25;
+      var py = cy + Math.sin(ang) * baseR * 0.62 + (rand() - 0.5) * baseR * 0.25;
+      var rr = baseR * (0.28 + rand() * 0.22);
+      ctx.beginPath();
+      ctx.arc(px, py, rr, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.beginPath();
+    ctx.arc(cx, cy, baseR * 0.72, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (shoulders){
+      var neckW = baseR * 0.5;
+      var neckTop = cy + baseR * 0.55;
+      ctx.beginPath();
+      ctx.moveTo(cx - neckW * 0.4, neckTop);
+      ctx.lineTo(cx + neckW * 0.4, neckTop);
+      ctx.lineTo(cx + neckW * 0.55, neckTop + baseR * 0.5);
+      ctx.lineTo(cx - neckW * 0.55, neckTop + baseR * 0.5);
+      ctx.closePath();
+      ctx.fill();
+
+      var shoulderTop = neckTop + baseR * 0.42;
+      ctx.beginPath();
+      ctx.moveTo(cx - baseR * 1.35, H + 40);
+      ctx.quadraticCurveTo(cx - baseR * 1.3, shoulderTop - baseR*0.25, cx - baseR * 0.5, shoulderTop);
+      ctx.lineTo(cx + baseR * 0.5, shoulderTop);
+      ctx.quadraticCurveTo(cx + baseR * 1.3, shoulderTop - baseR*0.25, cx + baseR * 1.35, H + 40);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  var heroCanvas = document.getElementById('hero-canvas');
+  var aboutCanvas = document.getElementById('about-canvas');
+
+  function paintAll(){
+    if (heroCanvas) paintPanel(heroCanvas, 7, true);
+    if (aboutCanvas) paintPanel(aboutCanvas, 21, false);
+  }
+  paintAll();
+
+  var media = window.matchMedia('(prefers-color-scheme: dark)');
+  media.addEventListener && media.addEventListener('change', paintAll);
+})();
+</script>
